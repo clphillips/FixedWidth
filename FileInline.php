@@ -94,7 +94,7 @@ class FileInline implements \IteratorAggregate, \ArrayAccess, FileInterface
         
         $this->file->fseek(0, SEEK_END);
         
-        $this->file->fwrite((string)$line);
+        $this->file->fwrite((string)$line . $this->lineSeparator);
         return $this;
     }
 
