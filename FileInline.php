@@ -33,14 +33,18 @@ class FileInline implements \IteratorAggregate, \ArrayAccess, FileInterface
 
     public function getLine($index)
     {
-        $this->file->seek($index);
+        if ($index !== null) {
+            $this->file->seek($index);
+        }
         
         if (!$this->file->valid()) {
 
             throw new \OutOfBoundsException('The index is outside of the available indexes of lines.');
         }
         
-        return new Line($this->file->current());
+        $line = $this->file->current();
+        $this->file->next();
+        return new Line($line);
     }
 
     public function offsetExists($offset)
