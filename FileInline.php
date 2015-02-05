@@ -43,7 +43,11 @@ class FileInline implements \IteratorAggregate, \ArrayAccess, FileInterface
         }
         
         $line = $this->file->current();
-        $this->file->next();
+        
+        if ($index === null) {
+            $this->file->next();
+        }
+        
         return new Line($line);
     }
 
